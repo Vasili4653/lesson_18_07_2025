@@ -34,7 +34,7 @@ public class Main {
         bw.close();
         fw.close();
         // Серилизация (запись бинарного файла)
-        FileOutputStream fos = new FileOutputStream("data.bin");
+        /*FileOutputStream fos = new FileOutputStream("data.bin");
         ObjectOutputStream oos = new ObjectOutputStream(fos);
         oos.writeFloat(3.14f);
         oos.writeBoolean(true);
@@ -45,7 +45,7 @@ public class Main {
         oos.writeObject(p);
         oos.flush();
         oos.close();
-        fos.close();
+        fos.close();*/
         //Де-серилизация (чтение бинарного файла)
         //Вызывать методы read в том же порядке, что и записывали
         FileInputStream fis = new FileInputStream("data.bin");
@@ -54,9 +54,13 @@ public class Main {
         System.out.println(f);
         ois.readBoolean();
         ois.readChar();
-        Player p2 = (Player) ois.readObject();
+        Player p2 = null;
+        try{
+            p2 = (Player) ois.readObject();
+        } catch (ClassNotFoundException e){
+            System.out.println(e.getCause());
+        }
         System.out.println(p2.name);
         System.out.println(p2.getHealth());
-
     }
 }

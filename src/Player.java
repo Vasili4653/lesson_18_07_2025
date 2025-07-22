@@ -1,3 +1,5 @@
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.Serializable;
 
 public class Player implements Serializable {//для сериализации нужно наследование от интерфейса Serializable
@@ -9,6 +11,10 @@ public class Player implements Serializable {//для сериализации �
 
     public int rank;
 
+    public int age;
+
+    public float test;
+
 
     public float getHealth() {
         return health;
@@ -16,5 +22,18 @@ public class Player implements Serializable {//для сериализации �
 
     public void setHealth(float health) {
         this.health = health;
+    }
+
+    private void readObject(ObjectInputStream ois) throws IOException, ClassNotFoundException{
+        /*try{
+            ois.defaultReadObject();
+        } catch (Exception e){
+            // TODO
+            System.out.println("error");
+        }*/
+        //this.health = ois.readFloat();
+        ObjectInputStream.GetField fields = ois.readFields();
+        System.out.println(fields);
+
     }
 }
